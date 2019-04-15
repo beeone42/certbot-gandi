@@ -5,12 +5,17 @@ This container generates [LetsEncrypt](https://www.letsencrypt.org) certificates
 
 This image is based on Alpine and uses [Certbot](https://certbot.eff.org/) to communicate with Letsencrypt.
 
+Based on
+--------
+
+Based on https://github.com/Roliga/docker-letsencrypt-gandi
+
 Building
 --------
 
 Simply clone this repository and build the image:
 
-	git clone https://github.com/Roliga/docker-letsencrypt-gandi.git
+	git clone https://github.com/gissehel/docker-letsencrypt-gandi.git
 	docker build -t letsencrypt-gandi docker-letsencrypt-gandi
 
 Configuration
@@ -26,7 +31,7 @@ The container can then be started as follows:
 		-v /path/to/certs:/etc/letsencrypt \
 		-v /path/to/config/file:/etc/update-certs/config:ro \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		letsencrypt-gandi
+		gissehel/letsencrypt-gandi
 
 The container will then generate a certificate as it starts, then check if it needs renewing every 5 days. The certificate will be available in `path/to/certs/live/`, in a directory named after the first domain specified in the config file.
 
