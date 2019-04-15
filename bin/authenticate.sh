@@ -12,10 +12,10 @@ else
 fi
 
 curl -s -X POST \
-	-H 'Content-Type: application/json' \
-	-H "X-Api-Key: $GANDI_API_KEY" \
-	-d "{\"rrset_name\": \"$record_name\",
-	     \"rrset_type\": \"TXT\",
-	     \"rrset_ttl\": 300,
-	     \"rrset_values\": [\"$CERTBOT_VALIDATION\"]}" \
-	"$api/domains/$domain/records" | sed 's/{"message": "DNS Record Created"}//' >&2
+    -H 'Content-Type: application/json' \
+    -H "X-Api-Key: $GANDI_API_KEY" \
+    -d "{\"rrset_name\": \"$record_name\",
+         \"rrset_type\": \"TXT\",
+         \"rrset_ttl\": 300,
+         \"rrset_values\": [\"$CERTBOT_VALIDATION\"]}" \
+    "$api/domains/$domain/records" | sed 's/{"message": "DNS Record Created"}//' >&2

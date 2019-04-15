@@ -12,6 +12,6 @@ else
 fi
 
 curl -s -X DELETE \
-	-H 'Content-Type: application/json' \
-	-H "X-Api-Key: $GANDI_API_KEY" \
-	"$api/domains/$domain/records/$record_name/TXT" >&2
+    -H 'Content-Type: application/json' \
+    -H "X-Api-Key: $GANDI_API_KEY" \
+    "$api/domains/$domain/records/$record_name/TXT" >&2
