@@ -1,14 +1,14 @@
-beeone/letsencrypt-gandi
+letsencrypt-gandi
 ========================
 
 This container generates [LetsEncrypt](https://www.letsencrypt.org) certificates for subdomains at [Gandi](https://www.gandi.net) using the DNS-01 challenge type and Gandi's new LiveDNS API.
 
 This image is based on Alpine and uses [Certbot](https://certbot.eff.org/) to communicate with Letsencrypt.
 
-Source
+Build
 --------
 
-You can find the source of this image here: https://github.com/gissehel/docker-letsencrypt-gandi
+You can find build of this image here: [https://github.com/beeone42/docker-letsencrypt-gandi](https://hub.docker.com/r/beeone/letsencrypt-gandi)
 
 Running
 -------------
