@@ -1,6 +1,6 @@
 #!/bin/sh
 
-api='https://dns.api.gandi.net/api/v5'
+api='https://api.gandi.net/v5/livedns'
 
 domain=$(echo "$CERTBOT_DOMAIN" | sed -r 's/.+\.(.+\..+)/\1/')
 subdomain=$(echo "$CERTBOT_DOMAIN" | sed -r 's/(.+)\..+\..+/\1/')
@@ -11,11 +11,14 @@ else
   record_name="_acme-challenge.$subdomain"
 fi
 
-curl -s -X POST \
+#echo "apikey: $GANDI_API_KEY"
+echo "domain: $domain"
+echo "record: $record_name"
+echo "valide: $CERTBOT_VALIDATION"
+
+curl -s -X PUT \
     -H 'Content-Type: application/json' \
-    -H "X-Api-Key: $GANDI_API_KEY" \
-    -d "{\"rrset_name\": \"$record_name\",
-         \"rrset_type\": \"TXT\",
-         \"rrset_ttl\": 300,
+    -H "authorization: Bearer $GANDI_API_KEY" \
+    -d "{\"rrset_ttl\": 300,
          \"rrset_values\": [\"$CERTBOT_VALIDATION\"]}" \
-    "$api/domains/$domain/records" | sed 's/{"message": "DNS Record Created"}//' >&2
+    "$api/domains/$domain/records/$record_name/TXT" | sed 's/{"message":"DNS Record Created"}//' >&2
