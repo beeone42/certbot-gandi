@@ -5,6 +5,8 @@ api='https://api.gandi.net/v5/livedns'
 domain=$(echo "$CERTBOT_DOMAIN" | sed -r 's/.+\.(.+\..+)/\1/')
 subdomain=$(echo "$CERTBOT_DOMAIN" | sed -r 's/(.+)\..+\..+/\1/')
 
+cache=/tmp/gandi-cache
+
 if [ $subdomain == $domain ]; then
   record_name="_acme-challenge"
 else
@@ -16,6 +18,13 @@ fi
 #echo "record: $record_name"
 #echo "valide: $CERTBOT_VALIDATION"
 
+# if cache is already removed, record is already cleaned up so we can exit here
+
+if [[ ! -f "$cache"-"$record_name" ]] ; then
+    exit
+fi
+
+rm -f "$cache"-"$record_name"
 
 curl -s -X DELETE \
     -H 'Content-Type: application/json' \
